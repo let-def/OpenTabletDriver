@@ -174,7 +174,11 @@ namespace OpenTabletDriver.Output
             if (report is IEraserReport eraserReport && Pointer is IEraserHandler eraserHandler)
                 eraserHandler.SetEraser(eraserReport.Eraser);
             if (report is IAbsolutePositionReport absReport)
-                Pointer.SetPosition(absReport.Position);
+            {
+                if (absReport.Position.X > 0 && absReport.Position.Y > 0 &&
+                    absReport.Position.X <= this.max.X && absReport.Position.Y <= this.max.Y)
+                    Pointer.SetPosition(absReport.Position);
+            }
             if (report is ITabletReport tabletReport && Pointer is IPressureHandler pressureHandler)
                 pressureHandler.SetPressure(tabletReport.Pressure / (float)Tablet.Configuration.Specifications.Pen!.MaxPressure);
             if (report is ITiltReport tiltReport && Pointer is ITiltHandler tiltHandler)
