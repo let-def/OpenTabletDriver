@@ -176,7 +176,7 @@ namespace OpenTabletDriver.Output
             if (report is IAbsolutePositionReport absReport)
             {
                 if (absReport.Position.X > 0 && absReport.Position.Y > 0 &&
-                    absReport.Position.X <= this.max.X && absReport.Position.Y <= this.max.Y)
+                    absReport.Position.X <= this._max.X && absReport.Position.Y <= this._max.Y)
                     Pointer.SetPosition(absReport.Position);
             }
             if (report is ITabletReport tabletReport && Pointer is IPressureHandler pressureHandler)
